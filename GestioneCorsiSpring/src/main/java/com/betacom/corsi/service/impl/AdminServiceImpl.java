@@ -27,8 +27,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public Optional<Admin> findById(long id) {
-		return adminrep.findById(id);
+	public Optional<Admin> findByUsername(String username) {
+		return adminrep.findById(username);
 	}
 
 	@Override
