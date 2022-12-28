@@ -9,7 +9,7 @@ public interface CorsistaCorsoService {
 	void saveCorsistaCorso(CorsistaCorso corsistaCorso);
 	List<CorsistaCorso> getAll();
 	Optional<CorsistaCorso> findById(long id);
-	int getPostiOccupati();
-	int getNumCorsi();
-	String getCorsiFreq();
+	int getPostiOccupati(long id);
+	int getNumCorsi(long id);
+	List<String> getCorsiFreq();
 }
