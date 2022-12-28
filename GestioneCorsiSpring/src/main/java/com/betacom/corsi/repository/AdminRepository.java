@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.betacom.corsi.businesscomponent.model.Admin;
 
 @Repository
-public interface AdminRepository extends JpaRepository<Admin, Long>{
+public interface AdminRepository extends JpaRepository<Admin, String>{
 
 }
