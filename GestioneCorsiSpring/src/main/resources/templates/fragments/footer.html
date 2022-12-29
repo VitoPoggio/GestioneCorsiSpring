@@ -1,0 +1,35 @@
+<div th:fragment="footer" xmlns:th="http://www.w3.org/1999/xhtml"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<nav>
+		<h3>Navigazione</h3>
+		<ul sec:authorize="hasRole('ADMIN')">
+			<li><a href="/">Home Page</a></li>
+			<li><a href="/admin/aggiungicorsista">Aggiungi Corsista</a></li>
+			<li><a href="/admin/aggiungicorso">Aggiungi Corso</a></li>
+			<li><a href="/admin/gestionecorsi">Sezione admin</a></li>
+		</ul>
+	</nav>
+	<nav>
+		<h3>Contatti</h3>
+		<ul>
+			<li><a href="#">Contatti</a></li>
+			<li><a href="#">Aiuto</a></li>
+			<li><a href="#">About</a></li>
+			<li><a href="#">Site Map</a></li>
+		</ul>
+	</nav>
+	<section>
+		<!-- sezione descrittiva di un tag interno. Contiene link a risorse esterne -->
+		<h3>Social Media</h3>
+		<ul>
+			<li><a href="#">Facebook</a></li>
+			<li><a href="#">Instagram</a></li>
+			<li><a href="#">Twitter</a></li>
+			<li><a href="#">Pinterest</a></li>
+		</ul>
+	</section>
+	<p class="copyright">
+		Negozio on-line<sup>&copy;</sup>
+	</p>
+
+</div>

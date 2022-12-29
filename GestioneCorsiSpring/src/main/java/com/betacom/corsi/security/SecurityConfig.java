@@ -27,8 +27,6 @@ public class SecurityConfig {
 	 public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		  http.authorizeRequests()
 			  .antMatchers("/")
-			  .permitAll()
-			  .antMatchers("/admin/**")
 			  .hasRole("ADMIN")
 			  .and()
 			  .formLogin()
@@ -37,7 +35,7 @@ public class SecurityConfig {
 			  .and()
 			  .logout()
 			  .logoutRequestMatcher(new AntPathRequestMatcher("/logoutadmin"))
-			  .logoutSuccessUrl("/admin/");
+			  .logoutSuccessUrl("/");
 		  return http.build();
 	 }
 	

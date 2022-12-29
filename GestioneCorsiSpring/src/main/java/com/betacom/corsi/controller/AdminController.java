@@ -24,7 +24,6 @@ import com.betacom.corsi.service.DocenteService;
 
 @Controller
 @Scope("session")
-@RequestMapping("/admin")
 public class AdminController {
 	@Autowired
 	AdminService adminService;
@@ -46,10 +45,18 @@ public class AdminController {
 		List<String> corsiFreq = ccService.getCorsiFreq();
 		mv.addObject("corsiFreq", corsiFreq);
 		mv.addObject("ultimoCorso", corsoService.getUltimoCorso());
-		Double mediaCorsi = corsoService.getMediaCorsi();
-		mv.addObject("mediaCorsi", mediaCorsi); //al massimo fare Double
+		//Double mediaCorsi = corsoService.getMediaCorsi();
+		//mv.addObject("mediaCorsi", mediaCorsi); //al massimo fare Double
 		return mv;
 	}
+	
+	@RequestMapping(value = "/loginadmin", method = RequestMethod.GET)
+	public ModelAndView loginAdmin() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("loginadmin");
+		return mv;
+	}
+
 
 	// -----------NUOVO CORSISTA ------------
 
@@ -108,7 +115,7 @@ public class AdminController {
 		return mv;
 	}
 
-	@GetMapping("/eliminaordine/{id}")
+	@GetMapping("/eliminacorso/{id}")
 	public ModelAndView eliminaCorso(@PathVariable long id) {
 		corsoService.deleteCorso(id);
 		// altrimenti cambiare con delete(entity)

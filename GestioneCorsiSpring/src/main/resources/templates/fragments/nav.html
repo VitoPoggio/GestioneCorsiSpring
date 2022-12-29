@@ -1,0 +1,76 @@
+<header th:fragment="navbar" xmlns:th="http://www.w3.org/1999/xhtml"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<div sec:authorize="!hasRole('ADMIN')">
+					<a class="navbar-brand" href="/">Home Page</a>
+				</div>
+				<div sec:authorize="hasRole('ADMIN')">
+					<a class="navbar-brand" href="/admin/">Home Page</a>
+				</div>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul th:if="${utente_log?.getUsername()} != null"
+					class="nav navbar-nav">
+					<li><a href="/acquisti">Acquista</a></li>
+					<li><a href="/carrello">Riepilogo carrello</a></li>
+				</ul>
+				<ul th:if="${utente_log?.getUsername()} != null"
+					class="nav navbar-nav navbar-right">
+					<li><a href="/carrello"> <span
+							class="glyphicon glyphicon-shopping-cart">&nbsp;</span> <span
+							class="badge"> <th:block
+									th:text="${_carrello?.getArticoli()} ? ${_carrello?.getArticoli()} : '0'">
+									<!-- creo blocco in thymeleaf dove posso inserire testo dinamico --></span>
+					</a></li>
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button"> <span
+							class="glyphicon glyphicon-user">&nbsp;</span> <span
+							class="badge"> <th:block
+									th:text="${utente_log?.getUsername()}?${utente_log?.getUsername()}:' '">
+									<!-- creo blocco in thymeleaf dove posso inserire testo dinamico --></span>
+					</a>
+						<ul class="dropdown-menu">
+							<li><a href="/modutente">Modifica dell'utente</a></li>
+							<li><a href=/ordini>Elenco ordini</a></li>
+							<li><a style="color: red;" href=/eliminaUtente> Elimina
+									Utente</a></li>
+						</ul></li>
+					<li><a href="/logout"> <span
+							class="glyphicon glyphicon-power-off">&nbsp;</span>Logout
+					</a></li>
+				</ul>
+				<div sec:authorize="!hasRole('ADMIN')">
+					<ul th:if="${utente_log?.getUsername()} == null"
+						class="nav navbar-nav navbar-right">
+						<li><a href="/registrazione"> <span
+								class="glyphicon glyphicon-user">&nbsp;</span> Sign-up
+						</a></li>
+						<li><a href="/login"> <span
+								class="glyphicon glyphicon-log-in">&nbsp;</span> Login
+						</a></li>
+					</ul>
+				</div>
+				<div sec:authorize="hasRole('ADMIN')">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="/admin/gestionearticoli"> <span
+								class="glyphicon glyphicon-briefcase">&nbsp;</span> Articoli
+						</a></li>
+						<li><a href="/admin/gestioneordini"> <span
+								class="glyphicon glyphicon-list">&nbsp;</span> Ordini
+						</a></li>
+						<li><a href="/logoutadmin"> <span
+								class="glyphicon glyphicon-log-out">&nbsp;</span> Logout
+						</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
