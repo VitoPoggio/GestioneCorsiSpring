@@ -12,5 +12,6 @@ public interface CorsoService {
 	Optional<Corso> findById(long id);
 	int getPostiDisponibili(long id);
 	Date getUltimoCorso();
-	int getMediaCorsi();
+	double getMediaCorsi();
+	void deleteCorso(long id);
 }
