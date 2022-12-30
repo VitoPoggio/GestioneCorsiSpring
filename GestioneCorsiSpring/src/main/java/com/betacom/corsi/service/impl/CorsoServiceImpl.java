@@ -43,7 +43,7 @@ public class CorsoServiceImpl implements CorsoService {
 	}
 
 	@Override
-	public double getMediaCorsi() {
+	public Double getMediaCorsi() {
 		return correp.getMediaCorsi();
 	}
 

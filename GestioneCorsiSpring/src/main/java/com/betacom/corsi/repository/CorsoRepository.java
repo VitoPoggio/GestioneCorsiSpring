@@ -17,5 +17,5 @@ public interface CorsoRepository extends JpaRepository<Corso, Long> {
 	Date getUltimoCorso();
 
 	@Query(value = "select avg(datediff(data_fine_corso,data_inizio_corso)) from corso", nativeQuery = true)
-	double getMediaCorsi(); // vedere bene collection da usare
+	Double getMediaCorsi(); // vedere bene collection da usare
 }

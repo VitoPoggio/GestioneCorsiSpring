@@ -10,40 +10,48 @@
 			<h3>Sezione amministrazione</h3>
 		</header>
 		<ul class="nav nav-tabs">
-			<li role="presentation" class="active"><a href="/">Home</a>
+			<li role="presentation" class="active"><a href="/">Home</a></li>
+			<li role="presentation"><a th:href="@{/gestionecorsi}">Corsi</a>
 			</li>
-			<li role="presentation"><a th:href="@{#}">Ordini</a>
+			<li role="presentation"><a th:href="@{/gestionecorsisti}">Corsisti</a>
 			</li>
-			<li role="presentation"><a th:href="@{#}">Articoli</a>
-			</li>
-			<li role="presentation"><a th:href="@{#}">Registra
-					Admin</a></li>
+			<li role="presentation"><a th:href="@{/aggiungicorsista}">Registra
+					Corsista</a></li>
 		</ul>
 		<div class="row">
-			<div class="col-md-6">
-				<div class="panel panel-info" style="margin-top: 30px;">
-					<div class="panel-heading">
-						<h2 class="panel-title">Articolo pi&ugrave; venduto</h2>
-					</div>
-					<div class="panel-body">
-						<div th:each="articolo: ${aPiuVenduto}" class="col-md-8">
-							<h5>
-								Marca:&nbsp;
-								<th:block th:text="${articolo.marca}">
-							</h5>
-							<h5>
-								Modello:&nbsp;
-								<th:block th:text="${articolo.modello}">
-							</h5>
-							<h5>
-								Prezzo:&nbsp;
-								<th:block th:text="${#numbers.formatCurrency(articolo.prezzo)}">
-							</h5>
-						</div>
-					</div>
-				</div>
-			</div>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Statistica</th>
+						<th>Valore</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Corsisti Totali</td>
+						<td th:text="${numCorsisti}"></td>
+					</tr>
+					<tr>
+						<td>Corso più frequentato</td>
+						<td th:text="${corsiFreq}"></td>
+					</tr>
+					<tr>
+						<td>Inizio ultimo corso</td>
+						<td th:text="${ultimoCorso}"></td>
+					</tr>
+					<tr>
+						<td>Durata media corsi</td>
+						<td th:text="${mediaCorsi}"></td>
+					</tr>
+					<tr>
+						<td>Corsi con posti disponibili</td>
+						<td><a th:href="@{/gestionecorsi}"
+							class="btn btn-warning btn-sm">Visualizza</a></td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
+	<footer th:include="fragments/footer :: footer"></footer>
 </body>
 </html>

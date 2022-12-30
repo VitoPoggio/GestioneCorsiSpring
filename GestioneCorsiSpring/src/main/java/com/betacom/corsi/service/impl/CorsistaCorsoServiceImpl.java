@@ -8,12 +8,15 @@ import org.springframework.stereotype.Service;
 
 import com.betacom.corsi.businesscomponent.model.CorsistaCorso;
 import com.betacom.corsi.repository.CorsistaCorsoRepository;
+import com.betacom.corsi.repository.CorsoRepository;
 import com.betacom.corsi.service.CorsistaCorsoService;
 
 @Service
 public class CorsistaCorsoServiceImpl implements CorsistaCorsoService {
 	@Autowired
 	CorsistaCorsoRepository ccrep;
+	@Autowired
+	CorsoRepository correp;
 
 	@Override
 	public void saveCorsistaCorso(CorsistaCorso corsistaCorso) {
@@ -33,7 +36,8 @@ public class CorsistaCorsoServiceImpl implements CorsistaCorsoService {
 
 	@Override
 	public int getPostiOccupati(long id) {
-		return ccrep.getPostiOccupati(id);
+		int posti = correp.findById(id).get().getPostiDisponibili();
+		return posti - ccrep.getPostiOccupati(id);
 	}
 
 	@Override

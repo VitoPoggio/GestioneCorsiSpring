@@ -1,5 +1,6 @@
 package com.betacom.corsi.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +46,8 @@ public class AdminController {
 		List<String> corsiFreq = ccService.getCorsiFreq();
 		mv.addObject("corsiFreq", corsiFreq);
 		mv.addObject("ultimoCorso", corsoService.getUltimoCorso());
-		//Double mediaCorsi = corsoService.getMediaCorsi();
-		//mv.addObject("mediaCorsi", mediaCorsi); //al massimo fare Double
+		Double mediaCorsi = corsoService.getMediaCorsi();
+		mv.addObject("mediaCorsi", mediaCorsi); //al massimo fare Double
 		return mv;
 	}
 	
@@ -73,11 +74,11 @@ public class AdminController {
 	}
 
 	@PostMapping("/registrazionecorsista")
-	public ModelAndView registrazioneCorsista(Corsista corsista, Corso corso) {
+	public ModelAndView registrazioneCorsista(Corsista corsista) {
 		corsistaService.saveCorsista(corsista);
 		CorsistaCorso cc = new CorsistaCorso();
+		
 		cc.setCorsista(corsista);
-		cc.setCorso(corso);
 		ccService.saveCorsistaCorso(cc);
 		// ma viene collegato al corso?
 		return new ModelAndView("redirect:/admin/");
@@ -120,6 +121,21 @@ public class AdminController {
 		corsoService.deleteCorso(id);
 		// altrimenti cambiare con delete(entity)
 		return new ModelAndView("redirect:/admin/gestioneordini");
+	}
+	
+	@GetMapping("/corsidisponibili")
+	public ModelAndView gestioneCorsiDisponibili() {
+		List<Corso> listaCorsi = corsoService.getAll();
+		List<Corso> lista = new ArrayList<Corso>();
+		for(Corso c : listaCorsi) {
+			int posti = ccService.getPostiOccupati(c.getIdCorso());
+			if(posti>0)
+				lista.add(c);
+		}
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("corsiList", lista);
+		mv.setViewName("corsidisponibili");
+		return mv;
 	}
 	
 	// -----------GESTIONE CORSISTI ------------
