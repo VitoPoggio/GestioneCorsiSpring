@@ -10,7 +10,7 @@
 			<h3>Sezione amministrazione</h3>
 		</header>
 		<ul class="nav nav-tabs">
-			<li role="presentation" class="active"><a href="/">Home</a></li>
+			<li role="presentation" ><a href="/">Home</a></li>
 			<li role="presentation"><a th:href="@{/gestionecorsi}">Corsi</a>
 			</li>
 			<li role="presentation"><a th:href="@{/gestionecorsisti}">Corsisti</a>
@@ -19,34 +19,25 @@
 					Corsista</a></li>
 		</ul>
 		<div class="row">
-			<table class="table table-hover">
+			<table class="table table-hover" style="margin-top: 30px;">
 				<thead>
 					<tr>
-						<th>Statistica</th>
-						<th>Valore</th>
+						<th>Nome</th>
+						<th>Data Inizio</th>
+						<th>Data Fine</th>
+						<th>Costo</th>
+						<th>Posti Disponibili</th>
+						
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>Corsisti Totali</td>
-						<td th:text="${numCorsisti}"></td>
-					</tr>
-					<tr>
-						<td>Corso più frequentato</td>
-						<td th:text="${corsiFreq}"></td>
-					</tr>
-					<tr>
-						<td>Inizio ultimo corso</td>
-						<td th:text="${ultimoCorso}"></td>
-					</tr>
-					<tr>
-						<td>Durata media corsi</td>
-						<td th:text="${mediaCorsi}"></td>
-					</tr>
-					<tr>
-						<td>Corsi con posti disponibili</td>
-						<td><a th:href="@{/corsidisponibili}"
-							class="btn btn-warning btn-sm">Visualizza</a></td>
+					<tr th:each="corso:${corsiList}">					
+						<td th:text="${corso.nomeCorso}"></td>
+						<td th:text="${#dates.format(corso.dataInizioCorso, 'dd-MMM-YYYY')}"></td>
+						<td th:text="${#dates.format(corso.dataFineCorso, 'dd-MMM-YYYY')}"></td>
+						<td th:text="${#numbers.formatCurrency(corso.costoCorso)}"></td>
+						<td th:text="${corso.postiDisponibili}"></td>
+					
 					</tr>
 				</tbody>
 			</table>

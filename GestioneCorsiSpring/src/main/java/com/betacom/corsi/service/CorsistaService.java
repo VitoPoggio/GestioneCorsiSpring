@@ -9,4 +9,5 @@ public interface CorsistaService {
 	void saveCorsista(Corsista corsista);
 	List<Corsista> getAll();
 	Optional<Corsista> findById(long id);
+	void deleteCorsista(long id);
 }

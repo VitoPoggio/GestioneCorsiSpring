@@ -1,12 +1,12 @@
 <div th:fragment="footer" xmlns:th="http://www.w3.org/1999/xhtml"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-	<nav>
-		<h3>Navigazione</h3>
+	<nav sec:authorize="hasRole('ADMIN')">
+		<h3 >Navigazione</h3>
 		<ul sec:authorize="hasRole('ADMIN')">
 			<li><a href="/">Home Page</a></li>
-			<li><a href="/admin/aggiungicorsista">Aggiungi Corsista</a></li>
-			<li><a href="/admin/aggiungicorso">Aggiungi Corso</a></li>
-			<li><a href="/admin/gestionecorsi">Sezione admin</a></li>
+			<li><a href="/aggiungicorsista">Aggiungi Corsista</a></li>
+			<li><a href="/aggiungicorso">Aggiungi Corso</a></li>
+			<li><a href="/gestionecorsi">Sezione admin</a></li>
 		</ul>
 	</nav>
 	<nav>

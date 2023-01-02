@@ -36,8 +36,8 @@ public class CorsistaCorsoServiceImpl implements CorsistaCorsoService {
 
 	@Override
 	public int getPostiOccupati(long id) {
-		int posti = correp.findById(id).get().getPostiDisponibili();
-		return posti - ccrep.getPostiOccupati(id);
+		int posti = correp.findById(id).get().getPostiDisponibili() - ccrep.getPostiOccupati(id);
+		return posti ;
 	}
 
 	@Override

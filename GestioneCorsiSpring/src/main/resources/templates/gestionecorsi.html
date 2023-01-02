@@ -11,9 +11,9 @@
 		</header>
 		<ul class="nav nav-tabs">
 			<li role="presentation" ><a href="/">Home</a></li>
-			<li role="presentation"><a th:href="@{/gestionecorsi}">Corsi</a>
+			<li role="presentation" class="active"><a th:href="@{/gestionecorsi}">Corsi</a>
 			</li>
-			<li role="presentation" class="active"><a th:href="@{/gestionecorsisti}">Corsisti</a>
+			<li role="presentation"><a th:href="@{/gestionecorsisti}">Corsisti</a>
 			</li>
 			<li role="presentation"><a th:href="@{/aggiungicorsista}">Registra
 					Corsista</a></li>
@@ -22,26 +22,30 @@
 			<table class="table table-hover" style="margin-top: 30px;">
 				<thead>
 					<tr>
-						<th>Id</th>
 						<th>Nome</th>
-						<th>Cognome</th>
-						<th>Precedenti</th>
-						<th>Elimina</th>
+						<th>Data Inizio</th>
+						<th>Data Fine</th>
+						<th>Costo</th>
+						<th>Posti Totali</th>
+						<th>Elimina Corso</th>
 						
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="corsista:${listaCorsisti}">					
-						<td th:text="${corsista.idCorsista}"></td>
-						<td th:text="${corsista.nomeCorsista}"></td>
-						<td th:text="${corsista.cognomeCorsista}"></td>
-						<td th:text="${corsista.precedentiCorsista}"></td>
-						<td style="vertical-align:middle;"> <a th:href="@{|/eliminacorsista/${corsista.idCorsista}|}"
+					<tr th:each="corso:${corsiList}">					
+						<td th:text="${corso.nomeCorso}"></td>
+						<td th:text="${#dates.format(corso.dataInizioCorso, 'dd-MMM-YYYY')}"></td>
+						<td th:text="${#dates.format(corso.dataFineCorso, 'dd-MMM-YYYY')}"></td>
+						<td th:text="${#numbers.formatCurrency(corso.costoCorso)}"></td>
+						<td th:text="${corso.postiDisponibili}"></td>
+						<td style="vertical-align:middle;"> <a th:href="@{|/eliminacorso/${corso.idCorso}|}"
 					role="button" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></a></td>
 					
 					</tr>
 				</tbody>
 			</table>
+			<a th:href="@{/aggiungicorso}" role="button" class="btn btn-warning">
+			Aggiungi Corso </a>
 		</div>
 	</div>
 	<footer th:include="fragments/footer :: footer"></footer>

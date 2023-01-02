@@ -30,4 +30,10 @@ public class CorsistaServiceImpl implements CorsistaService {
 	public Optional<Corsista> findById(long id) {
 		return corsisrep.findById(id);
 	}
+
+	@Override
+	public void deleteCorsista(long id) {
+		corsisrep.deleteById(id);
+		
+	}
 }

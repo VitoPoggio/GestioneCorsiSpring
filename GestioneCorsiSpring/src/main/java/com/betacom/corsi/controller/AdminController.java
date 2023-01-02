@@ -74,10 +74,10 @@ public class AdminController {
 	}
 
 	@PostMapping("/registrazionecorsista")
-	public ModelAndView registrazioneCorsista(Corsista corsista) {
+	public ModelAndView registrazioneCorsista(Corsista corsista, long id) {
 		corsistaService.saveCorsista(corsista);
 		CorsistaCorso cc = new CorsistaCorso();
-		
+		cc.setCorso(corsoService.findById(id).get());
 		cc.setCorsista(corsista);
 		ccService.saveCorsistaCorso(cc);
 		// ma viene collegato al corso?
@@ -99,8 +99,7 @@ public class AdminController {
 	}
 
 	@PostMapping("/registrazionecorso")
-	public ModelAndView registrazioneCorso(Corso corso, Docente docente) {
-		corso.setDocente(docente);
+	public ModelAndView registrazioneCorso(Corso corso) {
 		corsoService.saveCorso(corso);
 		return new ModelAndView("redirect:/admin/");
 
@@ -120,7 +119,7 @@ public class AdminController {
 	public ModelAndView eliminaCorso(@PathVariable long id) {
 		corsoService.deleteCorso(id);
 		// altrimenti cambiare con delete(entity)
-		return new ModelAndView("redirect:/admin/gestioneordini");
+		return new ModelAndView("redirect:/gestionecorsi");
 	}
 	
 	@GetMapping("/corsidisponibili")
@@ -130,6 +129,7 @@ public class AdminController {
 		for(Corso c : listaCorsi) {
 			int posti = ccService.getPostiOccupati(c.getIdCorso());
 			if(posti>0)
+				c.setPostiDisponibili(posti);
 				lista.add(c);
 		}
 		ModelAndView mv = new ModelAndView();
@@ -147,6 +147,13 @@ public class AdminController {
 		mv.setViewName("gestionecorsisti");
 		mv.addObject("listaCorsisti", listaCorsisti);	
 		return mv;
+	}
+	
+	@GetMapping("/eliminacorsista/{id}")
+	public ModelAndView eliminaCorsista(@PathVariable long id) {
+		corsistaService.deleteCorsista(id);
+		// altrimenti cambiare con delete(entity)
+		return new ModelAndView("redirect:/gestionecorsisti");
 	}
 	
 	

@@ -35,5 +35,5 @@ public class Corsista implements Serializable{
 	
 	@OneToMany(mappedBy = "corsista", cascade = CascadeType.ALL)
 	@JsonIgnore
-	private Set<CorsistaCorso> cc = new HashSet<CorsistaCorso>();
+	private Set<CorsistaCorso> corso = new HashSet<CorsistaCorso>();
 }

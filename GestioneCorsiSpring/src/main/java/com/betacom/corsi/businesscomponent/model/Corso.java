@@ -58,6 +58,6 @@ public class Corso implements Serializable{
 	
 	@OneToMany(mappedBy = "corso", cascade = CascadeType.ALL)
 	@JsonIgnore
-	private Set<CorsistaCorso> oa = new HashSet<CorsistaCorso>();
+	private Set<CorsistaCorso> corsista = new HashSet<CorsistaCorso>();
 
 }

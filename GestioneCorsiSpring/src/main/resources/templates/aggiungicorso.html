@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/cdn :: cdn">
+<title>Admin</title>
+</head>
+<body>
+	<div th:insert="fragments/nav :: navbar"></div>
+	<div class="container">
+		<header class="page-header">
+			<h3>Sezione amministrazione</h3>
+		</header>
+		<ul class="nav nav-tabs">
+			<li role="presentation"><a href="/">Home</a></li>
+			<li role="presentation" class="active"><a
+				th:href="@{/gestionecorsi}">Corsi</a></li>
+			<li role="presentation"><a th:href="@{/gestionecorsisti}">Corsisti</a>
+			</li>
+			<li role="presentation"><a th:href="@{/aggiungicorsista}">Registra
+					Corsista</a></li>
+		</ul>
+		<div class="row" style="margin-top: 30px;">
+			<form th:action="@{/registrazionecorso}" method="post"
+				class="form-horizontal" id="userForm" th:object="${corso}">
+				<div class="form-group">
+					<label class="col-md-1 control-label">Nome</label>
+
+					<div class="col-md-4 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-user"></i></span> <input type="text"
+								name="nome" id="nome" th:field="*{nomeCorso}"
+								placeholder="Nome..." class="form-control">
+						</div>
+					</div>
+					<div class="col-md-7 control-label" id="infoNome"></div>
+
+				</div>
+				<div class="form-group">
+					<label class="col-md-1 control-label">Data Inizio</label>
+
+					<div class="col-md-4 inputGroupContainer">
+						<div class="input-group date" id="dp1">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-calendar"></i></span> <input type="text"
+								name="inizio" id="inizio" th:field="*{dataInizioCorso}"
+								placeholder="YYYY-MM-DD" class="form-control">
+						</div>
+					</div>
+				</div>
+				<!-- Date Peaker di JS -->
+				<script>
+					var start = new Date();
+					$(function() {
+						$('#dp1').datepicker({
+							format : 'yyyy/mm/dd',
+							autoclose : true,
+							startDate : start,
+							endDate : '2100/01/01'
+						}).on(
+								
+								'changeDate',
+								function(e) {
+									$('#userForm').bootstrapValidator(
+											'revalidateField', 'inizio');
+								});
+					
+						$('#dp2').datepicker({
+							format : 'yyyy/mm/dd',
+							autoclose : true,
+							startDate : new Date(),
+							endDate : '2100/01/01'
+						}).on(
+								'changeDate',
+								function(e) {
+									$('#userForm').bootstrapValidator(
+											'revalidateField', 'fine');
+								});
+					});
+				</script>
+				
+
+	
+				<div class="form-group">
+					<label class="col-md-1 control-label">Data Fine</label>
+
+					<div class="col-md-4 inputGroupContainer">
+						<div class="input-group date" id="dp2">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-calendar"></i></span> <input type="text"
+								name="fine" id="fine" th:field="*{dataFineCorso}"
+								placeholder="YYYY-MM-DD" class="form-control">
+						</div>
+					</div>
+				</div>
+
+				<!-- Date Peaker di JS -->
+			
+				<div class="form-group">
+					<label class="col-md-1 control-label">Costo</label>
+
+					<div class="col-md-4 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-user"></i></span> <input type="number"
+								name="costo" id="costo" th:field="*{costoCorso}"
+								placeholder="Costo..." class="form-control">
+						</div>
+					</div>
+					<div class="col-md-7 control-label" id="infoNome"></div>
+
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-1 control-label">Commenti</label>
+
+					<div class="col-md-4 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-user"></i></span> <input type="text"
+								name="Commenti" id="commenti" th:field="*{commentiCorso}"
+								placeholder="Commenti.." class="form-control">
+						</div>
+					</div>
+					<div class="col-md-7 control-label" id="infoNome"></div>
+
+				</div>
+				<div class="form-group">
+					<label class="col-md-1 control-label">Aula</label>
+
+					<div class="col-md-4 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-user"></i></span> <input type="text"
+								name="aula" id="aula" th:field="*{aulaCorso}"
+								placeholder="Aula.." class="form-control">
+						</div>
+					</div>
+					<div class="col-md-7 control-label" id="infoNome"></div>
+
+				</div>
+				<div class="form-group">
+					<label class="col-md-1 control-label">Posti</label>
+
+					<div class="col-md-4 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-user"></i></span> <input type="number"
+								name="Commenti" id="commenti" th:field="*{postiDisponibili}"
+								placeholder="posti" class="form-control" disabled="disabled">
+						</div>
+					</div>
+					<div class="col-md-7 control-label" id="infoNome"></div>
+
+				</div>
+				
+				
+				
+				
+				
+				<div class="form-group">
+					<label class="col-md-1 control-label">Docente</label>
+					<div class="col-md-4 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-user"></i></span> <select
+								class="form-select" aria-label="Default select example"
+								name="docente">
+								<option selected disabled>Docente</option>
+								<option th:each="docente:${docenti}"><th:block
+										th:text="${docente.nomeDocente}" th:field="*{docente.idDocente}"></option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<!-- div class row azzera la griglia row crando una nuova riga con una nuova griglia -->
+				<div class="row">
+					<div class="col-md-4 col-md-offset-1">
+						<button type="submit" class="btn btn-warning">
+							Registrati&nbsp;&nbsp;<span class="glyphicon glyphicon-send"></span>
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<footer th:include="fragments/footer :: footer"></footer>
+</body>
+</html>
