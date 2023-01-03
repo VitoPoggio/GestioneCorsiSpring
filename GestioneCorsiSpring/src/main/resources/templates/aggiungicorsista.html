@@ -65,7 +65,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="form-group" th:object="${id}">
+				<div class="form-group" >
 					<label class="col-md-1 control-label">Corso</label>
 					<div class="col-md-4 inputGroupContainer">
 						<div class="input-group">
@@ -74,7 +74,7 @@
 								class="form-select" aria-label="Default select example"
 								name="corso" >
 								<option selected disabled>Corsi disponibili</option>
-								<option  th:each="cor:${corsi}"><th:block th:text="${cor.nomeCorso}" th:field="*{cor.idCorso}" ></option>
+								<option  th:each="corso:${corsi}"><th:block th:text="${corso.idCorso}"  ></option>
 							</select>
 						</div>
 					</div>

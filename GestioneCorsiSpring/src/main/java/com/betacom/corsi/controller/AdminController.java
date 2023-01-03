@@ -74,7 +74,7 @@ public class AdminController {
 	}
 
 	@PostMapping("/registrazionecorsista")
-	public ModelAndView registrazioneCorsista(Corsista corsista, long id) {
+	public ModelAndView registrazioneCorsista(Corsista corsista, Long id) {
 		corsistaService.saveCorsista(corsista);
 		CorsistaCorso cc = new CorsistaCorso();
 		cc.setCorso(corsoService.findById(id).get());
